@@ -1,5 +1,5 @@
 const constants = {
-    URL: 'http://localhost:8000',
+    URL: 'https://inventory-y3ju.onrender.com',
 }
 
 export default constants;
