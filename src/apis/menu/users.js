@@ -43,6 +43,10 @@ const createUser = async ({ obj, access_token }) => {
     });
     return res.data;
 }
+const createCustomer = async (obj) => {
+    const res = await axios.post(`${constants.URL}/users/create-customer`, obj);
+    return res.data;
+}
 const editUser = async ({ id, obj, access_token }) => {
     const res = await axios.put(`${URL}/edit-user/${id}`, obj, {
         headers: {
@@ -51,4 +55,4 @@ const editUser = async ({ id, obj, access_token }) => {
     });
     return res.data
 }
-export { getUsers, deleteUser, createUser, editUser };
+export { getUsers, deleteUser, createUser, editUser, createCustomer };

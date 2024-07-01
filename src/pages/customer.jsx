@@ -7,8 +7,8 @@ import {
   Box,
   Grid,
 } from "@mui/material";
-import { createUser } from "../apis/auth/user";
 import { useNavigate } from "react-router-dom";
+import { createCustomer } from "../apis/menu/users";
 
 const CustomerForm = () => {
   const [formData, setFormData] = useState({
@@ -34,7 +34,10 @@ const CustomerForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
-      let data = await createUser({ ...formData, employeeId: formData.name });
+      let data = await createCustomer({
+        ...formData,
+        employeeId: formData.name,
+      });
       //   console.log(data);
       if (!data.error) {
         alert("Password Creation mail sent to your registred mail");
