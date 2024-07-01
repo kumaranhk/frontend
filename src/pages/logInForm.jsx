@@ -43,8 +43,10 @@ const LogIn = () => {
         localStorage.setItem("user", JSON.stringify(data.user));
         localStorage.setItem("isAuthenticated", true);
         naviagte("/products");
+      } else {
+        alert(data.msg);
       }
-      console.log(data);
+      // console.log(data);
       setFormData({
         email: "",
         password: "",
@@ -104,6 +106,9 @@ const LogIn = () => {
           </Button>
           <Link variant="contained" href="/forgot-password">
             Forgot Password
+          </Link>
+          <Link variant="contained" href="/create-customer">
+            New User?
           </Link>
         </Box>
       </form>

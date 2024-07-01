@@ -72,6 +72,7 @@ const Users = () => {
         borderColor: "black",
         borderWidth: "2",
         height: "100vh",
+        width: "100vw",
       }}
     >
       <Box

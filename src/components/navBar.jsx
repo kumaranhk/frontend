@@ -2,7 +2,6 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
-import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
@@ -62,7 +61,7 @@ export default function PermanentDrawerLeft() {
             { value: "Vendors", icon: <GroupIcon />, link: "/vendors" },
             { value: "Users", icon: <PersonIcon />, link: "/users" },
             { value: "Orders", icon: <LocalShippingIcon />, link: "/orders" },
-            { value: "Reports", icon: <AssessmentIcon />, link: "/reports" },
+            // { value: "Reports", icon: <AssessmentIcon />, link: "/reports" },
           ].map((val) => (
             <ListItem key={val.value} disablePadding>
               <ListItemButton sx={{ textDecorationStyle: "none" }}>

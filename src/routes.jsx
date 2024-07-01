@@ -12,11 +12,12 @@ import VendorForm from './pages/vendors/vendorForm';
 import Orders from './pages/orders/orders';
 import Users from './pages/users/users';
 import CreateUserForm from './pages/users/userForm';
+import CustomerForm from './pages/customer';
 
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<ProtectedRoute Component={() => <>hello</>} />} />
+      {/* <Route path="/" element={<ProtectedRoute Component={() => <>hello</>} />} /> */}
       <Route path="/products" element={<ProtectedRoute Component={Products} />} />
       <Route path="/products/:id" element={<ProtectedRoute Component={ProductOrderForm} />} />
       <Route path="/products/create-product" element={<ProtectedRoute Component={ProductCreationForm} />} />
@@ -25,11 +26,11 @@ const AppRoutes = () => {
       <Route path="/orders" element={<ProtectedRoute Component={Orders} />} />
       <Route path="/users" element={<ProtectedRoute Component={Users} />} />
       <Route path="/users/user" element={<ProtectedRoute Component={CreateUserForm} />} />
-      {/* Non-protected routes */}
       <Route path="/log-in" element={<LogIn />} />
       <Route path="/reset-password" element={<ForgotPassWord />} />
       <Route path="/forgot-password" element={<ResetPassword />} />
       <Route path="*" element={<h1>Page Not Found!</h1>} />
+      <Route path='/create-customer' element={<CustomerForm />} />
     </Routes>
   );
 };

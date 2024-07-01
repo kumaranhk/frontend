@@ -18,7 +18,7 @@ const AppContent = () => {
   const location = useLocation();
 
   // Define the routes that should not have the layout
-  const noLayoutRoutes = ["/log-in", "/reset-password", "/forgot-password"];
+  const noLayoutRoutes = ["/log-in", "/reset-password", "/forgot-password","/create-customer"];
 
   const isNoLayoutRoute = noLayoutRoutes.includes(location.pathname);
 

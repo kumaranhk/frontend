@@ -3,27 +3,20 @@ import {
   Container,
   TextField,
   Button,
-  MenuItem,
   Typography,
   Box,
   Grid,
 } from "@mui/material";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { createUser, editUser, getUsers } from "../../apis/menu/users";
-import { getAccesstoken } from "../../utlis/utils";
+import { createUser } from "../apis/auth/user";
 
-const CreateUserForm = () => {
+const CustomerForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    role: "",
+    role: "admin",
     employeeId: "",
   });
-  const [searchParams] = useSearchParams();
-  const type = searchParams.get("type");
-  const id = searchParams.get("id");
   const [errors, setErrors] = useState({});
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -33,42 +26,19 @@ const CreateUserForm = () => {
     let tempErrors = {};
     tempErrors.name = formData.name ? "" : "This field is required.";
     tempErrors.email = formData.email ? "" : "This field is required.";
-    tempErrors.role = formData.role ? "" : "This field is required.";
-    tempErrors.employeeId = formData.employeeId
-      ? ""
-      : "This field is required.";
     setErrors(tempErrors);
     return Object.values(tempErrors).every((x) => x === "");
   };
 
-  useEffect(() => {
-    if (type === "edit" && id) {
-      populateForm(id);
-    }
-  }, [type, id]);
-
-  const user = JSON.parse(localStorage.getItem("user"));
-  const customerId = user?.customerId;
-
-  const populateForm = async () => {
-    const data = await getUsers(customerId, id);
-    if (!data.error) {
-      setFormData((prevState) => ({
-        ...prevState,
-        ...data.user,
-      }));
-    } else setFormData({ name: "", email: "", role: "", employeeId: "" });
-  };
-  const access_token = getAccesstoken();
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
-      let data = "";
-      type === "create"
-        ? (data = await createUser({ ...formData, customerId, access_token }))
-        : (data = await editUser({ id, obj: formData, access_token }));
-      console.log(data);
-      !data.error && navigate("/users");
+      let data = await createUser({ ...formData, employeeId: formData.name });
+      //   console.log(data);
+      if (!data.error) {
+        alert("Password Creation mail sent to your registred mail");
+        navigate("/log-in");
+      }
       setFormData({
         name: "",
         email: "",
@@ -101,7 +71,7 @@ const CreateUserForm = () => {
         onSubmit={handleSubmit}
       >
         <Typography variant="h4" sx={{ textAlign: "left", mb: 2 }}>
-          {type === "create" ? "Create User" : "Edit User"}
+          Create Customer
         </Typography>
         <TextField
           label="Name"
@@ -113,7 +83,6 @@ const CreateUserForm = () => {
           {...(errors.name && { error: true, helperText: errors.name })}
         />
         <TextField
-          disabled={type === "edit" ? true : false}
           label="Email"
           name="email"
           variant="outlined"
@@ -122,35 +91,14 @@ const CreateUserForm = () => {
           onChange={handleChange}
           {...(errors.email && { error: true, helperText: errors.email })}
         />
-        <TextField
-          label="Role"
-          name="role"
-          select
-          variant="outlined"
-          size="medium"
-          sx={{ textAlign: "left" }}
-          value={formData.role}
-          onChange={handleChange}
-          {...(errors.role && { error: true, helperText: errors.role })}
-        >
-          <MenuItem value="admin">Admin</MenuItem>
-          <MenuItem value="supervisor">Supervisor</MenuItem>
-        </TextField>
-        <TextField
-          label="Employee ID"
-          name="employeeId"
-          variant="outlined"
-          size="medium"
-          value={formData.employeeId}
-          onChange={handleChange}
-          {...(errors.employeeId && {
-            error: true,
-            helperText: errors.employeeId,
-          })}
-        />
         <Grid item xs={12}>
           <Box
-            sx={{ display: "flex", justifyContent: "flex-end", mt: 2, gap: 2 }}
+            sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+              mt: 2,
+              gap: 2,
+            }}
           >
             <Button
               variant="outlined"
@@ -170,4 +118,4 @@ const CreateUserForm = () => {
   );
 };
 
-export default CreateUserForm;
+export default CustomerForm;
