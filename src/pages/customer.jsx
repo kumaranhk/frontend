@@ -8,6 +8,7 @@ import {
   Grid,
 } from "@mui/material";
 import { createUser } from "../apis/auth/user";
+import { useNavigate } from "react-router-dom";
 
 const CustomerForm = () => {
   const [formData, setFormData] = useState({
@@ -17,7 +18,7 @@ const CustomerForm = () => {
     employeeId: "",
   });
   const [errors, setErrors] = useState({});
-
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
