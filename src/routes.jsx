@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import ProtectedRoute from '../protectedRoute';
 import LogIn from './pages/logInForm';
 import ResetPassword from './pages/forgotPassword';
@@ -13,11 +13,12 @@ import Orders from './pages/orders/orders';
 import Users from './pages/users/users';
 import CreateUserForm from './pages/users/userForm';
 import CustomerForm from './pages/customer';
-
 const AppRoutes = () => {
+
+const naviagte = useNavigate();
   return (
     <Routes>
-      {/* <Route path="/" element={<ProtectedRoute Component={() => <>hello</>} />} /> */}
+      <Route path="/" element={<ProtectedRoute Component={() => naviagte('/products')} />} />
       <Route path="/products" element={<ProtectedRoute Component={Products} />} />
       <Route path="/products/:id" element={<ProtectedRoute Component={ProductOrderForm} />} />
       <Route path="/products/create-product" element={<ProtectedRoute Component={ProductCreationForm} />} />
