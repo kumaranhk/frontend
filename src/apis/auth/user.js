@@ -1,7 +1,8 @@
 import axios from "axios";
+import constants from "../../constants/constants";
 
 // const URL = import.meta.env.BACK_END_URL;
-const URL = 'http://localhost:8000';
+const URL = constants.URL;
 
 const createUser = async (data) => {
     try {
